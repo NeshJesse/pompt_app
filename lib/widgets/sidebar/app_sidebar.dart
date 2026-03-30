@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import '../../core/routes/app_tab.dart';
 import 'package:pompt_app/core/theme/sidebar_const.dart';
@@ -7,6 +5,7 @@ import 'side_header.dart';
 import 'nav_item.dart';
 import 'collapse_btn.dart';
 import 'create_btn.dart';
+import 'package:pompt_app/screens/projects/widgets/create_project.dart';
 
 class AppSidebar extends StatelessWidget {
   const AppSidebar({
@@ -36,17 +35,18 @@ class AppSidebar extends StatelessWidget {
         children: [
           SidebarHeader(expanded: expanded),
           const SizedBox(height: 8),
-          Container(
-            width: 200,
-            height: 50,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.add_box_rounded),
-                const SizedBox(height: 8),
-                Text("Create Project"),
-              ],
-            ),
+
+          CreateButton(
+            expanded: expanded,
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                useSafeArea: true,
+                backgroundColor: Colors.transparent,
+                builder: (_) => const CreateProjectDialog(),
+              );
+            },
           ),
 
           Expanded(
